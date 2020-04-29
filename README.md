@@ -1,2 +1,1 @@
-# myproject
-시험용 저장소입니다.
+#HUFS_Internet_Application_2020_개인과제저장소
