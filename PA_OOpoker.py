@@ -129,9 +129,9 @@ class Hands:
     def __init__(self, cards, players):
         if len(cards) != 5:
             raise ValueError('not 5 cards')
-        # self.cards = sorted(cards, reverse=True)
-        self.cards = cards
+        self.cards = sorted(cards, reverse=True)
         self.players = players
+        self.temp = []
 
     def __len__(self):
         return len(self.cards)
@@ -139,116 +139,92 @@ class Hands:
     def __repr__(self):
         return len(self.cards)
     
-    def high_card_in_145(self):
-        temp_rank1 = []
-        for i in self.cards:
-            temp_rank1.append(i[0])
-        temp_rank2 = []
-        for i in temp_rank1:
-            if i == '2': temp_rank2.append(2)
-            if i == '3': temp_rank2.append(3)
-            if i == '4': temp_rank2.append(4)
-            if i == '5': temp_rank2.append(5)
-            if i == '6': temp_rank2.append(6)
-            if i == '7': temp_rank2.append(7)
-            if i == '8': temp_rank2.append(8)
-            if i == '9': temp_rank2.append(9)
-            if i == 'T': temp_rank2.append(10)
-            if i == 'J': temp_rank2.append(11)
-            if i == 'Q': temp_rank2.append(12)
-            if i == 'K': temp_rank2.append(13)
-            if i == 'A': temp_rank2.append(14)
-        return max(temp_rank2)
+    def cut_rank_only(self,l1,l2):
+        for i in l1:
+            l2.append(i[0])
     
-    def high_card_in_236(self):
-        temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
-        pair_dict = collections.Counter(temp_rank)  # Use dictionary to count pair
-        return max(pair_dict.keys(),key=pair_dict.get)
+    def cut_suit_only(self,l1,l2):
+        for i in l1:
+            l2.append(i[1])
 
-    def high_card_in_7(self):
-        temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
-        pair_dict = collections.Counter(temp_rank)
-
-        num = 0
-        ret = []
-        for i,j in sorted(pair_dict.items(), key =lambda x:x[1]):
-            num += 1
-            ret.append(i)
-            if num >=2: break
-        return ret
-    
-    def high_card_in_8(self):
-        temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
-        pair_dict = collections.Counter(temp_rank)
-
-        for i,j in sorted(pair_dict.items(), key =lambda x:x[1]):
-            return i
+    def change_rank_to_number(self,l1,l2):
+        while(True):                      # clean the container
+            if len(l2) == 0: break
+            l2.pop()
+        for i in l1:
+            if i == '2': l2.append(2)
+            if i == '3': l2.append(3)
+            if i == '4': l2.append(4)
+            if i == '5': l2.append(5)
+            if i == '6': l2.append(6)
+            if i == '7': l2.append(7)
+            if i == '8': l2.append(8)
+            if i == '9': l2.append(9)
+            if i == 'T': l2.append(10)
+            if i == 'J': l2.append(11)
+            if i == 'Q': l2.append(12)
+            if i == 'K': l2.append(13)
+            if i == 'A': l2.append(14)
+        
+    def change_number_to_rank(self,l1,l2):
+        while(True):                      # clean the container
+            if len(l2) == 0: break
+            l2.pop()
+        for i in l1:
+            if i == 2: l2.append('2')
+            if i == 3: l2.append('3')
+            if i == 4: l2.append('4')
+            if i == 5: l2.append('5')
+            if i == 6: l2.append('6')
+            if i == 7: l2.append('7')
+            if i == 8: l2.append('8')
+            if i == 9: l2.append('9')
+            if i == 10: l2.append('T')
+            if i == 11: l2.append('J')
+            if i == 12: l2.append('Q')
+            if i == 13: l2.append('K')
+            if i == 14: l2.append('A')
 
     def is_one_pair(self):
         temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
+        self.cut_rank_only(self.cards,temp_rank)
         pair_dict = collections.Counter(temp_rank)  # Use dictionary to count pair
         if len(pair_dict) == 4: return True
         else: return False
     
     def is_two_pair(self):
         temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
+        self.cut_rank_only(self.cards,temp_rank)
         pair_dict = collections.Counter(temp_rank)  # Use dictionary to count pair
         if len(pair_dict) == 3: return True
         else: return False
     
     def is_triple(self):
         temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
+        self.cut_rank_only(self.cards,temp_rank)
         pair_dict = collections.Counter(temp_rank)  # Use dictionary to count pair
         if 3 in pair_dict.values(): return True
         else: return False
 
     def is_fourcard(self):
         temp_rank = []
-        for i in self.cards:
-            temp_rank.append(i[0])
+        self.cut_rank_only(self.cards,temp_rank)
         pair_dict = collections.Counter(temp_rank)  # Use dictionary to count pair
         if len(pair_dict) == 2: return True
         else: return False
 
     def is_straight(self):
         temp_rank1 = []
-        for i in self.cards:
-            temp_rank1.append(i[0])
+        self.cut_rank_only(self.cards,temp_rank1)
         temp_rank2 = []
-        for i in temp_rank1:
-            if i == '2': temp_rank2.append(2)
-            if i == '3': temp_rank2.append(3)
-            if i == '4': temp_rank2.append(4)
-            if i == '5': temp_rank2.append(5)
-            if i == '6': temp_rank2.append(6)
-            if i == '7': temp_rank2.append(7)
-            if i == '8': temp_rank2.append(8)
-            if i == '9': temp_rank2.append(9)
-            if i == 'T': temp_rank2.append(10)
-            if i == 'J': temp_rank2.append(11)
-            if i == 'Q': temp_rank2.append(12)
-            if i == 'K': temp_rank2.append(13)
-            if i == 'A': temp_rank2.append(14)
+        self.change_rank_to_number(temp_rank1,temp_rank2)
         sorted(temp_rank2)
         if temp_rank2[0]+2 == temp_rank2[1]+1 == temp_rank2[2] == temp_rank2[3]-1 == temp_rank2[4]-2: return True
         else: return False
 
     def is_flush(self):
         temp_suit = []
-        for i in self.cards:
-            temp_suit.append(i[1])
+        self.cut_suit_only(self.cards,temp_suit)
         if temp_suit[0] == temp_suit[1] == temp_suit[2] == temp_suit[3] ==temp_suit[4]: return True
         else: return False
 
@@ -263,44 +239,24 @@ class Hands:
         elif self.is_one_pair() == True:                                 return 8   # One pair (Rank 8)
         else:                                                            return 9   # High card (Rank 9)
 
-    def value(self,value):
-        if value == '2': return 2
-        if value == '3': return 3
-        if value == '4': return 4
-        if value == '5': return 5
-        if value == '6': return 6
-        if value == '7': return 7
-        if value == '8': return 8
-        if value == '9': return 9
-        if value == 'T': return 10
-        if value == 'J': return 11
-        if value == 'Q': return 12
-        if value == 'K': return 13
-        if value == 'A': return 14
+    def rank_value(self):
+        return (self.hand_ranking(),self.cards)
+    
+    def match(self,other):
+        if self.rank_value()[0] < other.rank_value()[0]: print(f'Player {self.players} Win!')
+        if self.rank_value()[0] > other.rank_value()[0]: print(f'Player {other.players} Win!')
+        if self.rank_value()[0] == other.rank_value()[0]:
+            temp_rank1, temp_rank2 = [], []
+            self.cut_rank_only(self.cards,temp_rank1)
+            other.cut_rank_only(other.cards,temp_rank2)
+            temp_rank3, temp_rank4 = [], []
+            self.change_rank_to_number(temp_rank1,temp_rank3)
+            other.change_rank_to_number(temp_rank2,temp_rank4)
+            for i in range(len(temp_rank3)):
+                if temp_rank3[i] > temp_rank4[i]: print(f'Player {self.players} Win!'); break
+                if temp_rank3[i] < temp_rank4[i]: print(f'Player {other.players} Win!'); break
 
-    def match(self,other):  # Let's fight
-        if value(self.hand_ranking()) > value(other.hand_ranking()): print(f'Player {self.players} Win!')
-        if value(self.hand_ranking()) < value(other.hand_ranking()) : print(f'Player {other.players} Win!')
-        if value(self.hand_ranking()) == value(other.hand_ranking()) :
-            if value(self.hand_ranking()) == 1 or value(self.hand_ranking()) == 4 or value(self.hand_ranking()) == 5:                            # If ranks draw in Straight flush/Flush/Straight
-                if value(self.high_card_in_145()) > value(other.high_card_in_145()): print(f'Player {self.players} Win!')
-                if value(self.high_card_in_145()) < value(other.high_card_in_145()): print(f'Player {other.players} Win!')
-                if value(self.high_card_in_145()) == value(other.high_card_in_145()): print('Draw!')
-            if value(self.hand_ranking()) == 2 or value(self.hand_ranking()) == 3 or value(self.hand_ranking()) == 6:                            # If ranks draw in Four of a kind/Full house/Three of a kind
-                if value(self.high_card_in_236()) > value(other.high_card_in_236()): print(f'Player {self.players} Win!')
-                if value(self.high_card_in_236()) < value(other.high_card_in_236()): print(f'Player {other.players} Win!')
-                if value(self.high_card_in_236()) == value(other.high_card_in_236()): print('Draw!')
-            if value(self.hand_ranking()) == 7:                                                                                    # If ranks draw in Two pair
-                if value(self.high_card_in_7()[0]) > value(other.high_card_in_7()[0]): print(f'Player {self.players} Win!')
-                if value(self.high_card_in_7()[0]) < value(other.high_card_in_7()[0]): print(f'Player {other.players} Win!')
-                if value(self.high_card_in_7()[0]) == value(other.high_card_in_7()[0]):
-                    if value(self.high_card_in_7()[1]) > value(other.high_card_in_7()[1]): print(f'Player {self.players} Win!')
-                    if value(self.high_card_in_7()[1]) < value(other.high_card_in_7()[1]): print(f'Player {other.players} Win!')
-                    if value(self.high_card_in_7()[1]) == value(other.high_card_in_7()[1]): print('Draw!')
-            if value(self.hand_ranking()) == 8:                                                                                    # If ranks draw in One pair
-                if value(self.high_card_in_8()) > value(other.high_card_in_8()): print(f'Player {self.players} Win!')
-                if value(self.high_card_in_8()) < value(other.high_card_in_8()): print(f'Player {other.players} Win!')
-                if value(self.high_card_in_8()) == value(other.high_card_in_8()): print('Draw!')
+                
 
 ########################## Function main ##########################
 
@@ -316,11 +272,27 @@ if __name__ == '__main__':
             msg = ("Test at line {0} FAILED.".format(linenum))
         print(msg)
     
-    # your test cases here
+    # test case1
     a_player_deck = Hands(['2C','5H','QD','QS','TH'],'A')
     b_player_deck = Hands(['3D','4C','4S','3H','3C'],'B')
+    print(a_player_deck.rank_value())
+    print(b_player_deck.rank_value())
     a_player_deck.match(b_player_deck)
-
-    a_player_deck = Hands(['2C','2H','QD','QS','QH'],'A')
-    b_player_deck = Hands(['3D','3C','KS','KH','KC'],'B')
+    # test case 2
+    a_player_deck = Hands(['4C','4H','4D','4S','TH'],'A')
+    b_player_deck = Hands(['3H','3C','3D','3S','9C'],'B')
+    print(a_player_deck.rank_value())
+    print(b_player_deck.rank_value())
+    a_player_deck.match(b_player_deck)
+    # test case 3
+    a_player_deck = Hands(['2C','2H','4D','4S','TH'],'A')
+    b_player_deck = Hands(['JH','JC','9D','3S','3C'],'B')
+    print(a_player_deck.rank_value())
+    print(b_player_deck.rank_value())
+    a_player_deck.match(b_player_deck)
+    # test case 4
+    a_player_deck = Hands(['3C','3H','3D','9S','TH'],'A')
+    b_player_deck = Hands(['JH','JC','JD','3S','2C'],'B')
+    print(a_player_deck.rank_value())
+    print(b_player_deck.rank_value())
     a_player_deck.match(b_player_deck)
