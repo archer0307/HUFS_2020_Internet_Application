@@ -259,7 +259,7 @@ class Hands:
                 
 
 ########################## Function main ##########################
-
+'''
 if __name__ == '__main__':
 
     import sys
@@ -296,3 +296,4 @@ if __name__ == '__main__':
     print(a_player_deck.rank_value())
     print(b_player_deck.rank_value())
     a_player_deck.match(b_player_deck)
+    '''
