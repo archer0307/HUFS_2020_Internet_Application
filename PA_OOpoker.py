@@ -289,6 +289,7 @@ if __name__ == '__main__':
     b_player_deck = Hands(['JH','JC','9D','3S','3C'],'B')
     print(a_player_deck.rank_value())
     print(b_player_deck.rank_value())
+<<<<<<< HEAD
     a_player_deck.match(b_player_deck)
     # test case 4
     a_player_deck = Hands(['3C','3H','3D','9S','TH'],'A')
@@ -297,3 +298,12 @@ if __name__ == '__main__':
     print(b_player_deck.rank_value())
     a_player_deck.match(b_player_deck)
     '''
+=======
+    a_player_deck.match(b_player_deck)
+    # test case 4
+    a_player_deck = Hands(['3C','3H','3D','9S','TH'],'A')
+    b_player_deck = Hands(['JH','JC','JD','3S','2C'],'B')
+    print(a_player_deck.rank_value())
+    print(b_player_deck.rank_value())
+    a_player_deck.match(b_player_deck)
+>>>>>>> 0c8a14f5de1952d34239bf64098f6fc84794d1fd
