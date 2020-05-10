@@ -86,7 +86,7 @@ class Set:
     def __ixor__(self,other):   return self.symmetric_difference_update(other)
     
 ################## test code ##################
-'''
+
 x = Set([1,3,5,7,9])
 y = Set([1,5,9])
 print(y.issubset(x))
@@ -127,4 +127,3 @@ print(k)
 l = Set([1,4,7])
 l.remove(5)
 print(l)
-'''
