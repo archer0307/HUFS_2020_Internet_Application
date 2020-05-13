@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#heading1 {
+    background-color: black;
+    color: orange;
+    font-size: 300%;
+    font-weight: bold;
+    padding: 45px;
+    text-align: center;
+}
+#paragraph1{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1 id="heading1">자바스크립트 사용하기.</h1>
+
+<p1 id="paragraph1">자바스크립트를 이용하여 HTML 문서의 내용을 추가할 수 있습니다.</p1>
+
+<button type="button" onclick="myFunction()">눌러보세요</button>
+
+<p1 id="demo"> 버튼을 누르지 않았을 때의 텍스트. </p1>
+
+<script>
+function myFunction() { 
+  document.getElementById("demo").innerHTML = "버튼을 눌렀을 때의 텍스트.";
+}
+</script>
+
+</body>
+</html>
