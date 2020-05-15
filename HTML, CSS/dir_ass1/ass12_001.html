@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+function programming_language(sw) {
+    var pic;
+    if (sw == 0) {
+        pic = "ass12_java.jpg"
+    } 
+    else {
+        pic = "ass12_kotlin.jpg"
+    }
+    document.getElementById('programming_language').src = pic;
+}
+</script>
+
+<img id="programming_language" src="ass12_java.jpg" width="600" height="300">
+
+<p>
+<button type="button" onclick="programming_language(1); alert('Kotlin is a cross-platform, statically typed, general-purpose programming language with type inference.')">Kotlin on!</button>
+<button type="button" onclick="programming_language(0); alert('Java is a general-purpose programming language that is class-based, object-oriented, and designed to have as few implementation dependencies as possible.')">Java on!</button>
+</p>
+
+</body>
+</html>

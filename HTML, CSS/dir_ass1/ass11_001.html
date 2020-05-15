@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<style>
+#heading1 {
+  background-color: black;
+  color: orange;
+  font-size: 300%;
+  font-weight: bold;
+  padding: 45px;
+  text-align: center;
+}
+</style>
+<body>
+
+<h1 id="heading1">자바스크립트로 스타일 바꿔보기.</h1>
+
+<p id="demo">내 스타일로 바꿔보겠습니다.</p>
+
+<script>
+function myFunction() {
+  document.getElementById("demo").style.fontSize = "40px"; 
+  document.getElementById("demo").style.color = "orange";
+  document.getElementById("demo").style.backgroundColor = "black";     
+  document.getElementById("demo").innerHTML = "짜잔 스타일이 바뀌었습니다."   
+}
+</script>
+
+<button type="button" onclick="myFunction()">바꿔보기</button>
+
+</body>
+</html>
