@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
 
@@ -123,3 +125,4 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
+
